@@ -1,0 +1,14 @@
+@import url(../../../node_modules/bootstrap/scss/bootstrap.scss);
+@import url(../../../node_modules/font-awesome/css/font-awesome.css);
+@import url(../../../node_modules/bootstrap-vue/dist/bootstrap-vue.css);
+
+@import "colors";
+
+select, input, textarea {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body {
+  background-color: $color-white;
+}

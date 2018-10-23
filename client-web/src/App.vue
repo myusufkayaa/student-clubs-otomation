@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header-theme></header-theme>
+    <header-theme/>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
