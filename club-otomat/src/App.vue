@@ -12,7 +12,7 @@
 import HeaderTheme from './themes/header.theme'
 export default {
   name: 'App',
-  comments: { HeaderTheme }
+  components: { HeaderTheme }
 }
 </script>
 

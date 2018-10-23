@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'header.theme.vue'
+  name: 'HeaderTheme'
 }
 </script>
 

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
 @Component({
@@ -14,5 +14,13 @@ import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
   HelloWorld,
   },
   })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+    @Prop name: string = ''
+
+    crea
+
+    checkMethod () {
+
+    }
+}
 </script>
