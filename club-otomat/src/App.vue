@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <header-theme></header-theme>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,6 +8,13 @@
     <router-view/>
   </div>
 </template>
+<script>
+import HeaderTheme from './themes/header.theme'
+export default {
+  name: 'App',
+  comments: { HeaderTheme }
+}
+</script>
 
 <style lang="scss">
 #app {
