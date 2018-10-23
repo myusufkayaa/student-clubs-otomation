@@ -9,23 +9,27 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    compomemt: Home,
+    component: Home,
     meta: { title: 'Anasayfa!!!' }
   },
   {
     path: '/about/',
     name: 'about',
-    compomemt: About,
+    component: About,
     meta: { title: 'Hakkımızda!!!' }
   }
 ]
 
-const router = new Router({
+const router: Router = new Router({
   mode: 'history',
   routes: routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeResolve((to:any, from: any, next: any) => {
+  next()
+})
+
+router.beforeEach((to: any, from: any, next: any) => {
   document.title = to.meta.title
   next()
 })
