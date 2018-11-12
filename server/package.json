@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Student Clubs Announcement App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "student",
+    "club",
+    "app"
+  ],
+  "author": "Bedirhan Yıldırım",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
