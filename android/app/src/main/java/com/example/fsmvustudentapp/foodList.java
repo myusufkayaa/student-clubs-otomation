@@ -1,75 +1,43 @@
 package com.example.fsmvustudentapp;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.net.ssl.HttpsURLConnection;
 
-import de.codecrafters.tableview.TableView;
-import de.codecrafters.tableview.listeners.TableDataClickListener;
-import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
-import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-public class foodList extends AppCompatActivity {
+public class foodList extends Fragment {
 
     static ArrayList<Foods> arrayOfFoods = new ArrayList<>();
-    String[] spaceProbeHolders = {"Tarih","Çorba","Ana Yemek1","Ana Yemek2","Ana Yemek3","Meze","Aperatif"};
-    String[][] spaceProbes;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-                  super.onCreate(savedInstanceState);
-           setContentView(R.layout.activity_food_list);
-           getRates();
-            final TableView<String[]> tb = findViewById(R.id.tableView);
-            fillTheTable();
-            tb.setHeaderAdapter(new SimpleTableHeaderAdapter(this, spaceProbeHolders));
-            tb.setDataAdapter(new SimpleTableDataAdapter(this, spaceProbes));
-            tb.addDataClickListener(new TableDataClickListener<String[]>() {
-                @Override
-                public void onDataClicked(int rowIndex, String[] clickedData) {
-                    Toast.makeText(foodList.this, ((String[])clickedData)[1], Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_food_list, container, false);
+    }
 
     public void getRates (){
         downloadData dD = new downloadData();
         try {
             String url = "https://sheets.googleapis.com/v4/spreadsheets/1kgxnFxb9pOkPvKHMAqsMFbh5LrMYTrftUKyJQuBkR1o/values/yemekhane?key=AIzaSyDaIfxBmmFG875woD1RuKYugqCy5ZWMF48";
-
             dD.execute(url);
         }catch (Exception e){
 
         }
     }
-    private void fillTheTable(){
-        spaceProbes = new String[arrayOfFoods.size()][7];
 
-        for (int i=0;i<arrayOfFoods.size();i++){
-            Foods s = arrayOfFoods.get(i);
-            spaceProbes[i][0] = s.getDay();
-            spaceProbes[i][1] = s.getSoup();
-            spaceProbes[i][2] = s.getMain_course();
-            spaceProbes[i][3] = s.getMain_course2();
-            spaceProbes[i][4] = s.getMain_course3();
-            spaceProbes[i][5] = s.getMeze();
-            spaceProbes[i][6] = s.getAperitif();
-
-        }
-
-    }
     private class downloadData extends AsyncTask<String, Void, String> {
 
         @Override
