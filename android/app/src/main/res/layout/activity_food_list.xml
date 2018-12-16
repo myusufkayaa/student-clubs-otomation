@@ -6,11 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".foodList">
 
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="397dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonback"
+        tools:layout_editor_absoluteX="-3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttontoday"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="5dp"
+        android:onClick="toDay"
+        android:text="Button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+        app:layout_constraintEnd_toStartOf="@+id/buttonnext"
+        app:layout_constraintStart_toEndOf="@+id/buttonback"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonnext"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="9dp"
+        android:onClick="next"
+        android:text="Button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttontoday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttontoday" />
+
+    <Button
+        android:id="@+id/buttonback"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:onClick="back"
+        android:text="Button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toStartOf="@+id/buttontoday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ben kucuk bir yemek listesiyim"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="121dp" />
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttontoday"
+        app:layout_constraintTop_toBottomOf="@+id/buttonnext" />
+
 </android.support.constraint.ConstraintLayout>

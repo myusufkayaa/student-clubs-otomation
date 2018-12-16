@@ -1,59 +1,42 @@
-package com.example.fsmvustudentapp;
+package com.example.fsmvu.otomasyonv1;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 
+public class MainActivity extends AppCompatActivity {
 
-public class foodList extends Fragment {
 
-    static ArrayList<Foods> arrayOfFoods = new ArrayList<>();
-    TextView date;
-    Date today=new Date();
-    DateFormat df= new SimpleDateFormat("dd.MM.yyyy");
 
-    @Nullable
+
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.activity_food_list, container ,false);
-        TextView date = view.findViewById(R.id.date);
-
-
-
-
-        return view;
-    }
-
-    public void toDay (View view){
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        BottomNavigationView bnw= findViewById(R.id.bottom_navigation);
+        bnw.setOnNavigationItemReselectedListener(navListenner);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         downloadData dD = new downloadData();
         try {
-
             String url = "https://sheets.googleapis.com/v4/spreadsheets/1kgxnFxb9pOkPvKHMAqsMFbh5LrMYTrftUKyJQuBkR1o/values/yemekhane?key=AIzaSyDaIfxBmmFG875woD1RuKYugqCy5ZWMF48";
             dD.execute(url);
-            for (int i=0; i<arrayOfFoods.size(); i++){
-                if (arrayOfFoods.get(i).day.equals(df.format(today))){
-                    date.setText(arrayOfFoods.get(i).day);
-                }
-            }
+
 
 
         }catch (Exception e){
@@ -61,15 +44,31 @@ public class foodList extends Fragment {
         }
 
 
+
     }
+    BottomNavigationView.OnNavigationItemReselectedListener navListenner= new BottomNavigationView.OnNavigationItemReselectedListener() {
+        @Override
+        public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
+            Fragment selectedFragment=null;
+            switch (menuItem.getItemId()){
+                case R.id.navigation_home:
+                    selectedFragment=new HomeFragment();
+                    break;
+                case R.id.navigation_food:
+                    selectedFragment=new FoodFragment();
+                    break;
+
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
 
 
-
+        }
+    };
     private class downloadData extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
-            String result = "";
+            String result;
             URL url;
             HttpsURLConnection httpsURLConnection;
 
@@ -89,6 +88,7 @@ public class foodList extends Fragment {
 
             }
             catch (Exception e){
+
                 return null;
             }
             return result;
@@ -104,7 +104,7 @@ public class foodList extends Fragment {
                     JSONArray json_food = foods.getJSONArray(i);
                     Foods row = new Foods(json_food.getString(0),json_food.getString(1),json_food.getString(2),
                             json_food.getString(3),json_food.getString(4),json_food.getString(5),json_food.getString(6));
-                    arrayOfFoods.add(row);
+                    Foods.arrayOfFoods.add(row);
                 }
             }
             catch (Exception e){
@@ -112,4 +112,5 @@ public class foodList extends Fragment {
             }
         }
     }
+
 }
